@@ -290,6 +290,24 @@ static inline KIFDisplacement KIFDisplacementForSwipingInDirection(KIFSwipeDirec
 - (void)tapRowInTableViewWithAccessibilityLabel:(NSString*)tableViewLabel atIndexPath:(NSIndexPath *)indexPath;
 
 /*!
+ @abstract Drags a particular view in the view hierarchy to drop on another view.
+ @discussion The view with the specified accesibility label will get dragged and dropped on specified to accesibility label.
+ @param label The accessibility label of the view to drag.
+ @param toLabel The accesibility label of the view to be the end point to release touch. 
+ */
+
+- (void)dragViewWithAccesibilityLabel:(NSString *)label toViewWithAccesibilityLabel:(NSString *)toLabel;
+
+/*!
+ @abstract Drags a particular view in the view hierarchy to drop on a point.
+ @discussion The view with the specified accesibility label will get dragged and dropped on specified point.
+ @param label The accessibility label of the view to drag.
+ @param point The point where the view will be dropped on to.
+ */
+
+- (void)dragViewWithAccesibilityLabel:(NSString *)label toPoint:(CGPoint)point;
+
+/*!
  @abstract Swipes a particular view in the view hierarchy in the given direction.
  @discussion The view will get the view with the specified accessibility label and swipe the screen in the given direction from the view's center.
  @param label The accessibility label of the view to swipe.
