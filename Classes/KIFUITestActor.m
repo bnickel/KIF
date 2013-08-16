@@ -489,6 +489,32 @@
     
 }
 
+- (void)dragViewWithAccesibilityLabel:(NSString *)label toViewWithAccesibilityLabel:(NSString *)toLabel
+{
+  
+  UIView *viewToDrag = nil;
+  UIAccessibilityElement *elementToDrag = nil;
+  
+  UIView *viewToDropOn = nil;
+  UIAccessibilityElement *elementDrop = nil;
+  
+  [self waitForAccessibilityElement:&elementToDrag view:&viewToDrag withLabel:label value:nil traits:UIAccessibilityTraitNone tappable:NO];
+  
+  [self waitForAccessibilityElement:&elementDrop view:&viewToDropOn withLabel:toLabel value:nil traits:UIAccessibilityTraitNone tappable:NO];
+  
+  // Within this method, all geometry is done in the coordinate system of
+  // the view to drag.
+  
+  CGRect elementFrame = [viewToDrag.window convertRect:elementToDrag.accessibilityFrame toView:viewToDrag];
+  CGPoint dragStart = CGPointCenteredInRect(elementFrame);
+  
+  CGRect elementStopFrame = [viewToDropOn.window convertRect:elementDrop.accessibilityFrame toView:viewToDropOn];
+  CGPoint dragStop = CGPointCenteredInRect(elementStopFrame);
+  
+  [viewToDrag dragFromPoint:dragStart toPoint:dragStop];
+}
+
+
 #define NUM_POINTS_IN_SWIPE_PATH 20
 
 - (void)swipeViewWithAccessibilityLabel:(NSString *)label inDirection:(KIFSwipeDirection)direction
