@@ -514,6 +514,26 @@
   [viewToDrag dragFromPoint:dragStart toPoint:dragStop];
 }
 
+- (void)dragViewWithAccesibilityLabel:(NSString *)label toPoint:(CGPoint)point
+{
+
+  UIView *viewToDrag = nil;
+  UIAccessibilityElement *elementToDrag = nil;
+  
+  
+  [self waitForAccessibilityElement:&elementToDrag view:&viewToDrag withLabel:label value:nil traits:UIAccessibilityTraitNone tappable:NO];
+  
+  
+  // Within this method, all geometry is done in the coordinate system of
+  // the view to drag.
+  
+  CGRect elementFrame = [viewToDrag.window convertRect:elementToDrag.accessibilityFrame toView:viewToDrag];
+  CGPoint dragStart = CGPointCenteredInRect(elementFrame);
+    
+  [viewToDrag dragFromPoint:dragStart toPoint:point];
+
+}
+
 
 #define NUM_POINTS_IN_SWIPE_PATH 20
 

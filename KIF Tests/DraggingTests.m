@@ -24,12 +24,12 @@
 }
 
 
-- (void)testDragViewWithAccessibilityLabel
+- (void)testDragViewWithAccessibilityLabelToPoint
 {
   
   [tester tapViewWithAccessibilityLabel:@"More"];
   [tester tapViewWithAccessibilityLabel:@"Edit"];
-  [tester dragViewWithAccesibilityLabel:@"5" toViewWithAccesibilityLabel:@"0"];
+  [tester dragViewWithAccesibilityLabel:@"5" toPoint:CGPointMake(2, 432)];
   [tester tapViewWithAccessibilityLabel:@"Done"];
   [tester tapViewWithAccessibilityLabel:@"5" traits:UIAccessibilityTraitButton];
   
